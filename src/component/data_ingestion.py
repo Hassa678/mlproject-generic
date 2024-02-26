@@ -13,7 +13,8 @@ import pandas as pd
 
 from component.data_transformation import DataTransformation
 from component.data_transformation import DataTransforConfig
-
+from component.model_trainer import ModelTrainer
+from component.model_trainer import ModelTrainerConfig
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
@@ -50,8 +51,9 @@ if __name__=='__main__':
     data_ingestion = DataIngestion()
     train_data,test_data =data_ingestion.initiat_data_ingestion()
     data_transformation = DataTransformation()
-    data_transformation.initite_data_transformition(train_data, test_data)
+    train_array,test_array,_ = data_transformation.initite_data_transformition(train_data, test_data)
     logging.info('data transformation is completed successfully')
+    model_trainer = ModelTrainer()
+    model_trainer.initiate_model_trainer(train_array, test_array)
     
-
         
