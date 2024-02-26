@@ -11,6 +11,8 @@ from logger import logging
 import pandas as pd
 
 
+from component.data_transformation import DataTransformation
+from component.data_transformation import DataTransforConfig
 
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
@@ -27,7 +29,7 @@ class DataIngestion:
     def initiat_data_ingestion(self):
         logging.info('entering data ingestion methode')
         try:
-            df=pd.read_csv('notebook\data\stud.csv')
+            df=pd.read_csv(r'notebook\data\stud.csv')
             logging.info('Read the dataset as dataframe')
             os.makedirs(os.path.dirname(self.ingestio_config.train_data_path),exist_ok=True)
             df.to_csv(self.ingestio_config.raw_data_path,index=False,header=True)
@@ -46,6 +48,10 @@ class DataIngestion:
 
 if __name__=='__main__':
     data_ingestion = DataIngestion()
-    data_ingestion.initiat_data_ingestion()
+    train_data,test_data =data_ingestion.initiat_data_ingestion()
+    data_transformation = DataTransformation()
+    data_transformation.initite_data_transformition(train_data, test_data)
+    logging.info('data transformation is completed successfully')
+    
 
         
