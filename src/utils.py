@@ -49,4 +49,12 @@ def evaluate_module(X_train, Y_train, X_test, Y_test, models,param) -> dict:
     except Exception as e:  # Handle specific exceptions
         raise CustomException(e, sys)
     
+    
+def load_object(fil_path):
+    try:
+        with open(fil_path,"rb") as file_obj:
+            return dill.load(file_obj)
+            
+    except Exception as e :
+        raise CustomException(e, sys)
 
